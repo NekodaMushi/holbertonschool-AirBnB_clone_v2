@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ Console Module """
 import cmd
-import shlex
 import sys
 import models
 from models.base_model import BaseModel
@@ -210,22 +209,23 @@ class HBNBCommand(cmd.Cmd):
         print("Destroys an individual instance of a class")
         print("[Usage]: destroy <className> <objectId>\n")
 
-    def do_all(self, arg):
-        """Prints string representations of instances"""
-        args = shlex.split(arg)
-        obj_list = []
-        if len(args) == 0:
-            obj_dict = models.storage.all()
-        elif args[0] in classes:
-            obj_dict = models.storage.all(classes[args[0]])
-        else:
+    def do_all(self, args):
+        """ Prints all instances based on class or not """
+        args = args.split(" ")
+        l_obj = []
+        objs = storage.all(args[0])
+        try:
+            if args[0] != "":
+                models.classes[args[0]]
+        except (KeyError, NameError):
             print("** class doesn't exist **")
-            return False
-        for key in obj_dict:
-            obj_list.append(str(obj_dict[key]))
-        print("[", end="")
-        print(", ".join(obj_list), end="")
-        print("]")
+            return
+        try:
+            for k, v in objs.items():
+                l_obj.append(v)
+        except:
+            pass
+        print(l_obj)
 
     def help_all(self):
         """ Help information for the all command """
