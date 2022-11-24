@@ -2,7 +2,6 @@
 """ Console Module """
 import cmd
 import sys
-import models
 from models.base_model import BaseModel
 from models import storage
 from models.user import User
@@ -210,22 +209,22 @@ class HBNBCommand(cmd.Cmd):
         print("[Usage]: destroy <className> <objectId>\n")
 
     def do_all(self, args):
-        """ Prints all instances based on class or not """
-        args = args.split(" ")
-        l_obj = []
-        objs = storage.all(args[0])
-        try:
-            if args[0] != "":
-                models.classes[args[0]]
-        except (KeyError, NameError):
-            print("** class doesn't exist **")
-            return
-        try:
-            for k, v in objs.items():
-                l_obj.append(v)
-        except:
-            pass
-        print(l_obj)
+        """ Shows all objects, or all objects of a class"""
+        print_list = []
+
+        if args:
+            args = args.split(' ')[0]  # remove possible trailing args
+            if args not in HBNBCommand.classes:
+                print("** class doesn't exist **")
+                return
+            for k, v in storage.all().items():
+                if k.split('.')[0] == args:
+                    print_list.append(str(v))
+        else:
+            for k, v in storage.all().items():
+                print_list.append(str(v))
+
+        print(print_list)
 
     def help_all(self):
         """ Help information for the all command """
