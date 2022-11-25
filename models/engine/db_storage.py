@@ -7,9 +7,13 @@ from os import getenv
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import sessionmaker, scoped_session
 import models
-from models.state import State
+from models.amenity import Amenity
 from models.city import City
-from models.base_model import Base
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
+from models.base_model import BaseModel, Base
 
 
 class DBStorage:
@@ -42,21 +46,18 @@ class DBStorage:
         """
         obj_dict = {}
         if cls != '':
-            all_objs = self.__session.query(models.classes[cls]).all()
-            for obj in all_objs:
-                key = "{}.{}".format(obj.__class__.__name__, obj.id)
-                obj_dict[key] = obj
-            return obj_dict
+            objs = self.__session.query(cls)
         else:
-            for key, val in models.classes.items():
-                if key != "BaseModel":
-                    all_objs = self.__session.query(val).all()
-                    if len(all_objs) > 0:
-                        for obj in all_objs:
-                            key = "{}.{}".format(
-                                obj.__class__.__name__, obj.id)
-                            obj_dict[key] = obj
-            return obj_dict
+            objs = self.__session.query(Amenity)
+            # We could have used extend() list method too,
+            # but would have needed another way to code also
+            objs += self.__session.query(City)
+            objs += self.__session.query(Place)
+            objs += self.__session.query(Review)
+            objs += self.__session.query(State)
+            objs += self.__session.query(User)
+        return {"{}.{}".format(obj.__class__.__name__, obj.id): obj
+                for obj in objs}
 
     def new(self, obj):
         """Adds the object to the current db session"""
@@ -76,7 +77,7 @@ class DBStorage:
         Commit all changes in database after
         the changings
         """
-        self.__session = Base.metadata.create_all(self.__engine)
+        Base.metadata.create_all(self.__engine)
         session_factory = sessionmaker(
             bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(session_factory)
@@ -85,3 +86,6 @@ class DBStorage:
     def close(self):
         """close session, proper ending"""
         self.__session.close()
+
+    def classes(self):
+        """ returns dictionary of valid classes """
