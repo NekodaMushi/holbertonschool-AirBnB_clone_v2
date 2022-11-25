@@ -1,11 +1,9 @@
 #!/usr/bin/python3
-"""This module defines a class User"""
+""" City Module for HBNB project """
 from models.base_model import BaseModel
 
 
-class User(BaseModel):
-    """This class defines a user by various attributes"""
-    email = ''
-    password = ''
-    first_name = ''
-    last_name = ''
+class City(BaseModel):
+    """ The city class, contains state ID and name """
+    state_id = ""
+    name = ""
