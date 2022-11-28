@@ -24,7 +24,7 @@ def hello_route_v1():
 def hello_route_v2(text):
     """App displaying 3 cmd"""
 
-    return 'C ' + text.replace('_',' ')
+    return 'C ' + text.replace('_', ' ')
 
 @app.route("/python/<text>", strick_slashes=False)
 def hello_route_v3(text):

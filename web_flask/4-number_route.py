@@ -32,10 +32,12 @@ def hello_route_v3(text):
 
     return 'Python' + text.replace('_', ' ')
 
-@app.route("/number/<n>", strick_slashes=False)
+@app.route("/number/<int:n>", strick_slashes=False)
 def hello_route_v4(n):
     """App displaying 4 cmd"""
 
     return f"{n} is a number"
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='5000')
