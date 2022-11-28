@@ -27,12 +27,11 @@ def hello_route_v2(text):
     return 'C ' + text.replace('_', ' ')
 
 
-@app.route('/python', strict_slashes=False)
-@app.route('/python/<text>', strict_slashes=False)
-def python(text='is cool'):
-    """
-    Display python with the parameter, that got a default value
-    """
+@app.route("/python", strict_slashes=False)
+@app.route("/python/<text>", strict_slashes=False)
+def hello_route_v3(text='is cool'):
+    """App displaying 4 cmd"""
+
     return 'Python ' + text.replace('_', ' ')
 
 
