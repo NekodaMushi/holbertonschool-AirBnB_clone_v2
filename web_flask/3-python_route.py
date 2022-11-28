@@ -26,11 +26,13 @@ def hello_route_v2(text):
 
     return 'C ' + text.replace('_', ' ')
 
+@app.route("/python", strick_slashes=False)
 @app.route("/python/<text>", strick_slashes=False)
 def hello_route_v3(text):
     """App displaying 4 cmd"""
 
     return 'Python' + text.replace('_', ' ')
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='5000')

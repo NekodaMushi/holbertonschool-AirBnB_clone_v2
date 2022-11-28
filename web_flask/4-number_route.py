@@ -36,7 +36,7 @@ def hello_route_v3(text):
 def hello_route_v4(n):
     """App displaying 4 cmd"""
 
-    return f"{n} is a number"
+    return "{} is a number".format(n)
 
 
 if __name__ == '__main__':
