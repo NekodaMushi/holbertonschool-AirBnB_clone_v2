@@ -26,6 +26,7 @@ def hello_route_v2(text):
 
     return 'C ' + text.replace('_', ' ')
 
+
 @app.route("/python", strick_slashes=False)
 @app.route("/python/<text>", strick_slashes=False)
 def hello_route_v3(text='is cool'):

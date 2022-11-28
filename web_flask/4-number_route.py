@@ -26,11 +26,13 @@ def hello_route_v2(text):
 
     return 'C ' + text.replace('_',' ')
 
+
 @app.route("/python/<text>", strick_slashes=False)
 def hello_route_v3(text='is cool'):
     """App displaying 4 cmd"""
 
     return 'Python' + text.replace('_', ' ')
+
 
 @app.route("/number/<int:n>", strick_slashes=False)
 def hello_route_v4(n):
