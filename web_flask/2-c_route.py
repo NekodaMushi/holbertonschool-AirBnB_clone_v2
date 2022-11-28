@@ -14,7 +14,7 @@ def hello_route():
 
 
 @app.route("/hbnb", strict_slashes=False)
-def hello_route_v2():
+def hello_route_v1():
     """App displaying 2 cmd"""
 
     return "HBNB"
@@ -22,8 +22,10 @@ def hello_route_v2():
 
 @app.route("/c/<text>", strict_slashes=False)
 def hello_route_v2(text):
-    """App displaying 3th cmd"""
-    return 'C ' + text.replace('_',' ')
+    """App displaying 3 cmd"""
+
+    return 'C ' + text.replace('_', ' ')
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='5000')
