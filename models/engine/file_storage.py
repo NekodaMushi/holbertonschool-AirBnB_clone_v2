@@ -61,3 +61,9 @@ class FileStorage:
         if obj is not None:
             bye_key = str(obj.__class__.__name__) + '.' + (obj.id)
             FileStorage.__objects.pop(bye_key)
+
+    def close(self):
+        """Reload data"""
+        self.reload()
+
+    

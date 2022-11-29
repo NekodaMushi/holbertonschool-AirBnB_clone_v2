@@ -5,7 +5,7 @@ Database mode, to be used with SQLAlchemy
 """
 from os import getenv
 from sqlalchemy import create_engine, MetaData
-from sqlalchemy.orm import sessionmaker, scoped_session
+from sqlalchemy.orm import Session, sessionmaker, scoped_session
 import models
 from models.amenity import Amenity
 from models.city import City
@@ -85,7 +85,7 @@ class DBStorage:
 
     def close(self):
         """close session, proper ending"""
-        self.__session.close()
+        self.__session.remove()
 
     def classes(self):
         """ returns dictionary of valid classes """
