@@ -40,7 +40,7 @@ def hello_route_v4(n):
     """App displaying 4 cmd"""
     return "{} is a number".format(n)
 
-@app.route("/number_template/<int:n>", strick_slashes=False)
+@app.route("/number_template/<int:n>", strict_slashes=False)
 def hello_route_v5(n):
     """App displaying 6 cmd"""
 
