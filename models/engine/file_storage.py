@@ -11,7 +11,7 @@ class FileStorage:
 
     def all(self, cls=None):
         """Returns dictionnary __objects"""
-        if cls == None:
+        if cls is None:
             return FileStorage.__objects
         myDict = {}
         for key, value in FileStorage.__objects.items():
@@ -65,5 +65,3 @@ class FileStorage:
     def close(self):
         """Reload data"""
         self.reload()
-
-    
