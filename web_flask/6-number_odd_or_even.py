@@ -43,13 +43,12 @@ def hello_route_v4(n):
 @app.route("/number_template/<int:n>", strict_slashes=False)
 def hello_route_v5(n):
     """App displaying 6 cmd"""
-
     return render_template('5-number.html', n=n)
+
 
 @app.route("/number_odd_or_even/<int:n>", strict_slashes=False)
 def hello_route_v6(n):
     """App displaying 7 cmd"""
-
     return render_template('6-number_odd_or_even.html', n=n)
 
 
