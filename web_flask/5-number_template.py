@@ -44,7 +44,7 @@ def hello_route_v4(n):
 @app.route("/number_template/<int:n>", strict_slashes=False)
 def hello_route_v5(n):
     """App displaying 6 cmd"""
-    return render_template('5-number.html', n=n)
+    return render_template('5-number.html', number=n)
 
 
 if __name__ == '__main__':
